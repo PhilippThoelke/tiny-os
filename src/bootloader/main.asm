@@ -27,16 +27,23 @@ dw 0xaa55
 
 Sector2:
 
-call enableA20
+call enableA20 ; enable the A20 line to access more then 1MB of memory
+
+call checkForCPUID ; check if the CPUID instruction is available, halt otherwise
 
 jmp $
 
-; A20 related strings
+%include "src/bootloader/cpuid.asm"
+
+; strings
 EnablingA20Msg: db "Checking if the A20 line is enabled...", 0
 biosEnableA20Msg: db "Trying to enable the A20 line using a BIOS interrupt...", 0
 keyboardEnableA20Msg: db "Trying to enable the A20 line using the keyboard controller...", 0
 fastEnableA20Msg: db "Trying to enable the A20 line using the FastA20 chipset method...", 0
 noA20Err: db "Failed to enable the A20 line. Halting...", 0
+
+CheckingCPUIDMsg: db "Checking if the CPUID instruction is available...", 0
+NoCPUIDErr: db "The CPUID instruction is not available. Halting...", 0
 
 ; pad the second sector to 512 bytes
 times 512-($-$$)+512 db 0
