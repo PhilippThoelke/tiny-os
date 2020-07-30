@@ -25,16 +25,45 @@ checkForCPUID:
 	; if yes, then the CPUID instruction is supported, otherwise CPUID is not available
 	xor eax, ebx
 	cmp eax, 0
-	je .no_CPUID
+	je .NoCPUID
 
 	popfd ; restore original EFLAGS
 	mov si, SuccessMsg
 	call prints
 	ret
 
-.no_CPUID:
+.NoCPUID:
 	mov si, FailedMsg
 	call prints
 	mov si, NoCPUIDErr
+	call prints
+	jmp $
+
+checkForLongMode:
+	mov si, CheckingLongModeMsg
+	call prints
+
+	; check if extended CPUID features (> 0x80000000) are available
+	mov eax, 0x80000000
+	cpuid
+	cmp eax, 0x80000001
+	jb .NoLongMode
+
+	; check if the LM bit (29th) is set after calling CPUID with eax=0x80000001
+	mov eax, 0x80000001
+	cpuid
+	test edx, 1 << 29
+	jz .NoLongMode
+
+	; long mode is available
+	mov si, SuccessMsg
+	call prints
+	ret
+
+
+.NoLongMode:
+	mov si, FailedMsg
+	call prints
+	mov si, NoLongModeErr
 	call prints
 	jmp $

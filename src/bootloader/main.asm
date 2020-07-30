@@ -29,6 +29,9 @@ Sector2:
 
 call enableA20 ; enable the A20 line to access more then 1MB of memory
 call checkForCPUID ; check if the CPUID instruction is available, halt otherwise
+call checkForLongMode ; check if long mode is available, halt otherwise
+
+jmp $
 
 ; strings
 EnablingA20Msg: db "Enabling the A20 line if it is disabled...", 0
@@ -36,6 +39,9 @@ noA20Err: db "Failed to enable the A20 line. Halting...", 0
 
 CheckingCPUIDMsg: db "Checking if the CPUID instruction is available...", 0
 NoCPUIDErr: db "The CPUID instruction is not available. Halting...", 0
+
+CheckingLongModeMsg: db "Checking if long mode is available...", 0
+NoLongModeErr: db "Long mode is not available. Halting...", 0
 
 %include "src/bootloader/longmode.asm"
 
