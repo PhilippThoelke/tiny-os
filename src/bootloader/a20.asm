@@ -43,36 +43,21 @@ enableA20:
 	cmp ax, 0
 	je .A20Success
 
-	; try enabling the A20 line using a BIOS interrupt
-	mov si, biosEnableA20Msg
-	call prints
-	call biosEnableA20
+	call biosEnableA20 ; try enabling the A20 line using a BIOS interrupt
 
 	; check if the A20 line is activated
 	call checkA20
 	cmp ax, 0
 	je .A20Success
 
-	mov si, FailedMsg
-	call prints
-
-	; try enabling the A20 line using the keyboard controller
-	mov si, keyboardEnableA20Msg
-	call prints
-	call keyboardEnableA20
+	call keyboardEnableA20 ; try enabling the A20 line using the keyboard controller
 
 	; check if the A20 line is activated
 	call checkA20
 	cmp ax, 0
 	je .A20Success
 
-	mov si, FailedMsg
-	call prints
-
-	; try enabling the A20 line using the FastA20 method
-	mov si, fastEnableA20Msg
-	call prints
-	call fastEnableA20
+	call fastEnableA20 ; try enabling the A20 line using the FastA20 method
 
 	; check if the A20 line is activated
 	call checkA20
