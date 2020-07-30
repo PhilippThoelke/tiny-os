@@ -55,8 +55,37 @@ printh:
 	
 .printbits:
 	; print 4 bits
-	mov al, [CHARS + bx]
+	mov al, [HEX_CHARS + bx]
 	int 0x10
 	ret
 
-CHARS: db "0123456789abcdef" 
+HEX_CHARS: db "0123456789abcdef" 
+
+printb:
+	mov ah, 0x0e ; set flag for printing
+	mov cl, 16 ; start the counter at 16 (dx has 16 bits)
+	.print_loop:
+		push dx ; save the number for the next iterations
+
+		dec cl ; decrement loop counter
+
+		shr dx, cl ; shift the current bit to the rightmost position
+		and dx, 1 ; set all other bits to 0
+
+		mov al, dl
+		add al, '0' ; '0' + 0 = '0' and '0' + 1 = '1'
+		int 0x10
+
+		pop dx ; reload the stored number for the next iteration
+
+		; check loop condition
+		cmp cl, 0
+		jne .print_loop
+
+	; print carriage return and new line
+	mov al, 0x0d
+	int 0x10
+	mov al, 0x0a
+	int 0x10
+
+	ret
