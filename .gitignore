@@ -1,2 +1,5 @@
-# binary files
 bin/
+
+*.iso
+*.bin
+*.img

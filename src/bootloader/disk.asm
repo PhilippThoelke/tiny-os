@@ -7,7 +7,7 @@ readSector:
 	mov al, 1 ; number of sectors to read
 	mov ch, 0 ; cylinder
 	mov dh, 0 ; head
-	mov dl, 0x80 ; 0x80 for hard drive (e.g. QEMU), 0x0 for floppy
+	mov dl, 0x0 ; drive type (0x0 for floppy)
 	
 	; set the es register to 0
 	push bx
