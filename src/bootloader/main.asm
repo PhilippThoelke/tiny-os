@@ -37,7 +37,7 @@ noA20Err: db "Failed to enable the A20 line. Halting...", 0
 CheckingCPUIDMsg: db "Checking if the CPUID instruction is available...", 0
 NoCPUIDErr: db "The CPUID instruction is not available. Halting...", 0
 
-%include "src/bootloader/cpuid.asm"
+%include "src/bootloader/longmode.asm"
 
 ; pad the second sector to 512 bytes
 times 512-($-$$)+512 db 0
