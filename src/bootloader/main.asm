@@ -15,8 +15,8 @@ jmp Sector2
 %include "src/bootloader/a20.asm"
 
 ; strings
-ReadingSectorMsg: db "Reading sector from a drive...", 0
-ReadSectorErr: db "Failed to read a sector from the drive. Halting...", 0
+ReadingSectorMsg: db "Reading sector from drive...", 0
+ReadSectorErr: db "Failed to read sector from the drive. Halting...", 0
 
 SuccessMsg: db "success", 0x0d, 0x0a, 0
 FailedMsg: db "failed", 0x0d, 0x0a, 0
