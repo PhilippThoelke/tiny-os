@@ -60,10 +60,23 @@ checkForLongMode:
 	call prints
 	ret
 
-
 .NoLongMode:
 	mov si, FailedMsg
 	call prints
 	mov si, NoLongModeErr
 	call prints
 	jmp $
+
+enableLongMode:
+	mov si, EnablingLongModeMsg
+	call prints
+
+	; enter long mode by setting the 9th bit in the model-specific register to 1
+	mov ecx, 0xc0000080
+	rdmsr
+	or eax, 1 << 8
+	wrmsr
+
+	mov si, SuccessMsg
+	call prints
+	ret
