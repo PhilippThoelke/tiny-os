@@ -1,4 +1,4 @@
-build/main.bin : src/bootloader/main.asm src/bootloader/print.asm src/bootloader/disk.asm src/bootloader/a20.asm src/bootloader/longmode.asm src/bootloader/pmode.asm src/bootloader/gdt.asm
+build/main.bin : src/bootloader/main.asm src/bootloader/print.asm src/bootloader/disk.asm src/bootloader/a20.asm src/bootloader/longmode.asm src/bootloader/pmode.asm src/bootloader/gdt.asm src/kernel/kernel.asm
 	mkdir -p build
 	nasm -fbin src/bootloader/main.asm -o build/main.bin
 

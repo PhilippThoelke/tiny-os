@@ -66,8 +66,10 @@ times 2*512-($-$$) db 0
 
 bits 64
 LongMode:
+jmp KERNEL
 
-jmp $
+; include the kernel code
+%include "src/kernel/kernel.asm"
 
 ; pad the third sector to 512 bytes
 times 3*512-($-$$) db 0
