@@ -37,7 +37,7 @@ checkForCPUID:
 	call prints
 	mov si, NoCPUIDErr
 	call prints
-	jmp $
+	jmp halt
 
 checkForLongMode:
 	mov si, CheckingLongModeMsg
@@ -65,7 +65,7 @@ checkForLongMode:
 	call prints
 	mov si, NoLongModeErr
 	call prints
-	jmp $
+	jmp halt
 
 enableLongMode:
 	mov si, EnablingLongModeMsg

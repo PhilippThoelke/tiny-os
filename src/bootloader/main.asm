@@ -16,6 +16,12 @@ call enableA20 ; enable the A20 line to access more then 1MB of memory
 ; continue execution in the second sector
 jmp Sector2
 
+; a label where the CPU halts forever
+halt:
+	cli
+	hlt
+	jmp halt
+
 ; includes
 %include "src/bootloader/print.asm"
 %include "src/bootloader/disk.asm"

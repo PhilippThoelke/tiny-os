@@ -70,7 +70,7 @@ enableA20:
 	; failed to enable the A20 line, halt forever
 	mov si, noA20Err
 	call prints
-	jmp $
+	jmp halt
 
 	.A20Success:
 		mov si, SuccessMsg

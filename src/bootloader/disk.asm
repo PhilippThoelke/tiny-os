@@ -29,4 +29,4 @@ readSector:
 		call prints
 		mov si, ReadSectorErr
 		call prints
-		jmp $
+		jmp halt

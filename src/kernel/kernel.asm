@@ -1,3 +1,3 @@
 KERNEL:
 
-jmp $
+jmp halt
