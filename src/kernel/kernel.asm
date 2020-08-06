@@ -1,3 +1,8 @@
+; TODO: DEFINE GRUB multiboot header
+
 KERNEL:
 
-jmp halt
+.done:
+	cli
+	hlt
+	jmp .done
