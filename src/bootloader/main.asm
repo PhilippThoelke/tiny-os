@@ -72,10 +72,9 @@ times 2*512-($-$$) db 0
 
 bits 64
 LongMode:
-jmp KERNEL
+; TODO: find the kernel and jump to its main function
 
-; include the kernel code
-%include "src/kernel/kernel.asm"
+call halt
 
 ; pad the third sector to 512 bytes
 times 3*512-($-$$) db 0
