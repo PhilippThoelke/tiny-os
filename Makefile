@@ -8,7 +8,7 @@ build/main.bin : src/bootloader/main.asm src/bootloader/print.asm src/bootloader
 
 build/kernel.bin : src/kernel/kernel.asm
 	mkdir -p build
-	nasm -fbin src/kernel/kernel.asm -o build/kernel.bin
+	nasm -felf32 src/kernel/kernel.asm -o build/kernel.bin
 
 ####################################################
 ############### run the os #########################
