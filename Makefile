@@ -36,10 +36,10 @@ clean :
 
 .PHONY : cleanvm
 cleanvm :
-	if vboxmanage list vms | grep -q "TinyOS"; then \
+	if vboxmanage list vms | grep -q "\"TinyOS\""; then \
 		vboxmanage unregistervm "TinyOS" --delete; \
 	fi; \
-	if vboxmanage list vms | grep -q "TinyOS-GRUB"; then \
+	if vboxmanage list vms | grep -q "\"TinyOS-GRUB\""; then \
 		vboxmanage unregistervm "TinyOS-GRUB" --delete; \
 	fi;
 
@@ -77,7 +77,7 @@ build/tinyos-grub.iso : build/kernel.bin
 
 .PHONY : vm
 vm : build/tinyos.iso
-	if ! vboxmanage list vms | grep -q "TinyOS"; then \
+	if ! vboxmanage list vms | grep -q "\"TinyOS\""; then \
 		vboxmanage createvm --name "TinyOS" --register; \
 		vboxmanage storagectl "TinyOS" --name "IDE" --add ide; \
 		vboxmanage storageattach "TinyOS" --storagectl "IDE" --port 0 --device 0 --type dvddrive --medium build/tinyos.iso; \
@@ -85,7 +85,7 @@ vm : build/tinyos.iso
 
 .PHONY : grub-vm
 grub-vm : build/tinyos-grub.iso
-	if ! vboxmanage list vms | grep -q "TinyOS-GRUB"; then \
+	if ! vboxmanage list vms | grep -q "\"TinyOS-GRUB\""; then \
 		vboxmanage createvm --name "TinyOS-GRUB" --register; \
 		vboxmanage storagectl "TinyOS-GRUB" --name "IDE" --add ide; \
 		vboxmanage storageattach "TinyOS-GRUB" --storagectl "IDE" --port 0 --device 0 --type dvddrive --medium build/tinyos-grub.iso; \
